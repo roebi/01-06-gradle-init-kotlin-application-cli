@@ -434,7 +434,22 @@ java {
 }
 ```
 
-That's it - thank you for following / working through this README.md
+## (NICE to HAVE) add a bash file with all the gradle tasks
+
+```git bash
+history > all_the_gradlew_commands.bsh
+```
+
+run all the gradlew commands:
+
+```git bash
+./all_the_gradlew_commands.bsh
+```
+
+edit / remove unwanted commands in all_the_gradlew_commands.bsh
+
+
+## That's it - thank you for following / working through this README.md
 
 ## from here it is the remaining piece of the README.md template from
 

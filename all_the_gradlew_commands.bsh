@@ -1,0 +1,18 @@
+#!/bin/bash
+./gradlew --version
+./gradlew app:dependencies --configuration runtimeClasspath
+./gradlew app:dependencies --configuration testRuntimeClasspath
+./gradlew tasks
+./gradlew javaToolChains
+./gradlew --help
+./gradlew help
+./gradlew run
+./gradlew :app:run
+./gradlew check
+./gradlew test
+./gradlew test --rerun-tasks
+./gradlew check --rerun-tasks
+./gradlew tasks
+./gradlew run --args='--help'
+./gradlew run --args='--version'
+./gradlew run --args='--repeat=2 i like gradle and picocli'
