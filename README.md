@@ -266,7 +266,7 @@ its description:
 
 Java command line parser with both an annotations API and a programmatic API. Usage help with ANSI styles and colors. Autocomplete. Nested subcommands. Easily included as source to avoid adding a dependency.
 
-and if yo click on the newest Version - current 4.7.4
+and if you click on the newest Version - current 4.7.4
 
 https://mvnrepository.com/artifact/info.picocli/picocli/4.7.4
 
