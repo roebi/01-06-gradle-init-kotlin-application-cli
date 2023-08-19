@@ -203,6 +203,223 @@ up to here it was a project setup with explanations.
 
 #### (MUST) add dependency for easy commandline handling
 
+How to find a Java Library?
+
+I personally like to old style MVN Repository with its Categories:
+
+in this case
+
+on https://mvnrepository.com i entered 'command line'
+
+find among other things Apache Commons CLI
+
+the click on **commons-cli**
+
+and the click on the Categories **Command Line Parsers**
+
+here we are, a list of Command Line Parser Libraries (ordered by popular (amount of usages) ):
+
+https://mvnrepository.com/open-source/command-line-parsers?sort=popular
+
+here you can see the last Release, the License and the usage of a library in other open source projects.
+
+for Example the first two Entries
+
+- Apache Commons CLI - Last Release on Oct 27, 2021 - 4573 usages - Apache License
+- JCommander - Last Release on Jan 11, 2022 - 1278 usages - Apache License
+
+if you interested in newer things
+
+change the search to **newest**
+
+https://mvnrepository.com/open-source/command-line-parsers?sort=newest
+
+here we found
+
+- **Scopt** - Last Release on Jul 2, 2022 - 563 usages - MIT License
+- it is for **Scala**: https://github.com/scopt/scopt
+
+about the MIT License:
+
+- https://choosealicense.com/licenses/mit/
+- https://opensource.org/license/mit/
+
+next is **Clikt**, it is for Kotlin, has a Apache License
+
+next is **Picocli** - Last Release on Jun 3, 2023 - 701 usages - Apache License
+
+about the Apache License:
+
+- https://choosealicense.com/licenses/apache/ Version 2.0
+- https://opensource.org/license/apache-2-0/ Version 2.0 
+- ( https://opensource.org/license/apache/ old Version 1.1 )
+
+Conditions of the Apache License 2.0
+
+- a copy of the license and copyright notice must be included with the licensed material
+
+then we use the **Picocli** Library:
+
+https://mvnrepository.com/artifact/info.picocli/picocli
+
+its description:
+
+Java command line parser with both an annotations API and a programmatic API. Usage help with ANSI styles and colors. Autocomplete. Nested subcommands. Easily included as source to avoid adding a dependency.
+
+and if yo click on the newest Version - current 4.7.4
+
+https://mvnrepository.com/artifact/info.picocli/picocli/4.7.4
+
+there is the HomePage: https://picocli.info
+
+over the HomePage you will find
+
+- its Repo: https://github.com/remkop/picocli
+- info like 'command line syntax styles including POSIX, GNU, MS-DOS and more'
+- info like [Quick Guide](https://picocli.info/quick-guide.html)
+
+now add the dependency to the app:
+
+back to https://mvnrepository.com/artifact/info.picocli/picocli/4.7.4
+
+switch to Tab **Gradle (Kotlin)**
+
+click in the Text field - and then - 'Copied to clipboard!' appears
+
+open ... /app/build.gradle.kts
+
+add it to the dependencies block like this:
+
+```build.gradle.kts
+dependencies {
+  implementation("org.apache.commons:commons-text")
+  implementation(project(":utilities"))
+  // https://mvnrepository.com/artifact/info.picocli/picocli
+  implementation("info.picocli:picocli:4.7.4")
+}
+```
+
+now the ide know about this gradle build change
+
+press on the icon **Load Gradle Changes**
+
+now in the ide in the **External Libraries** you will find the Entry **info.picocli:picocli:picocli:4.7.4**
+
+this means you can now use this Picocli Classes in your Project.
+
+and remember - with Gradle Task **installDist** in the app/build/install/app/lib there is the picocli-4.7.4.jar added.
+
+nice !
+
+remark: this is not a legal advice.
+
+> maybe someone here knows where this is defined exactly
+
+lets add the Apache 2.0 License of the **Picocli** Library to the Project in to the legal/picocli-NOTICE.txt file:
+
+same file structure and naming from here: https://svn.apache.org/repos/asf/axis/axis2/java/core/trunk/legal/
+
+with for example this content:
+
+```legal/picocli-LICENSE.txt
+  Apache License
+  Version 2.0, January 2004
+  ...
+```
+real content copy from here:
+
+https://github.com/remkop/picocli/blob/main/LICENSE
+
+use the **Raw** Link
+
+https://github.com/remkop/picocli/raw/main/LICENSE
+
+to copy its content directly in to
+
+**legal/picocli-LICENSE.txt**
+
+and add in the project directory a file named **NOTICE.txt**
+
+```NOTICE.txt
+Please read the different LICENSE files present in this distribution.
+```
+
+new TODO: We have to add all the files in directory legal in to the distribution ...
+
+The Application Plugin applies [The Distribution Plugin](https://docs.gradle.org/current/userguide/distribution_plugin.html#sec:distribution_contents)
+
+here we use **Distribution contents**
+
+and add this part into **app/build.gradle.kts**:
+
+about the contents block, it is a copy Spec.
+
+more info here:
+
+https://docs.gradle.org/current/dsl/org.gradle.api.tasks.Copy.html
+
+```app/build.gradle.kts
+distributions {
+    main {
+        contents {
+            from("../NOTICE.txt")
+            from("../legal")
+        }
+    }
+}
+```
+
+now try the Gradle Task **installDist**
+
+```git bash
+# fast version
+./gradlew installDist
+# version without optimizing
+./gradlew clean installDist --rerun-tasks
+```
+
+great, now NOTICE.txt and all files from **legal** directory are in
+
+... /app/build/install/app directory
+
+same with Gradle Task **distZip** / **distTar**
+
+## add the missing parts / what I have already done
+
+### implementation with Picocli Library
+
+from Picocli [Quick Guide](https://picocli.info/quick-guide.html)
+
+in File app/src/main/java/.../App.java change it to ...
+
+```App.java
+// see current file content of file App.java in this project
+```
+
+find more examples here:
+
+https://github.com/remkop/picocli/tree/main/picocli-examples/src/main/java/picocli/examples
+
+to run the application with some command line parameters try
+
+based on
+
+https://docs.gradle.org/current/dsl/org.gradle.api.tasks.JavaExec.html
+
+```git bash
+./gradlew run --args='--help'
+./gradlew run --args='--version'
+./gradlew run --args='--repeat=2 i like gradle and picocli'
+```
+
+That's it - thank you for following / working through this README.md
+
+## from here it is the remaining piece of the README.md template from
+
+https://github.com/jehna/readme-best-practices
+
+I didn't consciously erase it.
+
 ...
 
 Here's a brief intro about what a developer must do in order to start developing

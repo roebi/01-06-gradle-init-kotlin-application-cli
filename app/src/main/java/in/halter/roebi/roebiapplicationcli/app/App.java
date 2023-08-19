@@ -10,12 +10,45 @@ import static in.halter.roebi.roebiapplicationcli.utilities.StringUtils.split;
 import static in.halter.roebi.roebiapplicationcli.app.MessageUtils.getMessage;
 
 import org.apache.commons.text.WordUtils;
+import picocli.CommandLine;
+import picocli.CommandLine.Command;
+import picocli.CommandLine.Option;
+import picocli.CommandLine.Parameters;
 
-public class App {
-    public static void main(String[] args) {
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+@Command(name = "myApp", version = "myApp 0.1", header = "%n@|blue Start of Help of myApp|@", footer = "%n@|blue end of help of myApp|@", mixinStandardHelpOptions = true)
+public class App implements Runnable {
+
+    @Option(names = { "-r", "--repeat" }, description = "Repeat the words to Standard out.")
+    int repeat = 1;
+
+    @Parameters(paramLabel = "<word>", defaultValue = "Hello, picocli",
+            description = "Words to write to standard out.")
+    private String[] words = { "Hello,", "picocli" };
+
+    @Override
+    public void run() {
+        // The business logic of the command goes here ...
+        // In this case, your code
+
+        // Here the new Part from adapted Picocli Example
+        // use option 'repeat':
+        System.out.println("repeat: " + repeat);
+        // use parameter(s) 'words':
+        for (int i = 0; i < repeat; i++) {
+            System.out.println("repeat: " + i + " : words: " + Arrays.stream(words).collect(Collectors.joining(" ")).toString());
+        }
+
+        // Here the existing Part from the Gradle Init generation
         LinkedList tokens;
         tokens = split(getMessage());
         String result = join(tokens);
         System.out.println(WordUtils.capitalize(result));
+    }
+    public static void main(String[] args) {
+        int exitCode = new CommandLine(new App()).execute(args);
+        System.exit(exitCode);
     }
 }
