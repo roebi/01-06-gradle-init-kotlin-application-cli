@@ -38,7 +38,7 @@ public class App implements Runnable {
         System.out.println("repeat: " + repeat);
         // use parameter(s) 'words':
         for (int i = 0; i < repeat; i++) {
-            System.out.println("repeat: " + i + " : words: " + Arrays.stream(words).collect(Collectors.joining(" ")).toString());
+            System.out.println("repeat: " + (i + 1) + " : words: " + Arrays.stream(words).collect(Collectors.joining(" ")).toString());
         }
 
         // Here the existing Part from the Gradle Init generation
