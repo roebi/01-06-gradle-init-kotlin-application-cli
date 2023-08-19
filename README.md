@@ -63,9 +63,23 @@ BUILD SUCCESSFUL in 2m
 2 actionable tasks: 2 executed
 ```
 
+- all the git add / git commits
 
-Some projects require initial configuration (e.g. access tokens or keys, `npm i`).
-This is the section where you would document those requirements.
+## Structure of this Gradle Kotlin Multi-Project Build
+
+This Multi-Project Build has a **buildSrc** directory with generated Groovy settings and conventions.
+
+The generated **application** structure is:
+
+In the subproject / directory **app* is the main Java application.
+
+Its main class is 'in.halter.roebi.roebiapplicationcli.app.App'.
+
+This **app** use implementation of project / directory / library Java **utilities**.
+
+This **utilities** library use api of project / directory / library Java **list**.
+
+More Information about Gradle Kotlin Multi-Project Build: [Executing Multi-Project Builds](https://docs.gradle.org/current/userguide/intro_multi_project_builds.html)
 
 ## Developing
 
