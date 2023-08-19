@@ -440,14 +440,13 @@ java {
 history > all_the_gradlew_commands.bsh
 ```
 
+edit / remove unwanted commands in all_the_gradlew_commands.bsh
+
 run all the gradlew commands:
 
 ```git bash
 ./all_the_gradlew_commands.bsh
 ```
-
-edit / remove unwanted commands in all_the_gradlew_commands.bsh
-
 
 ## That's it - thank you for following / working through this README.md
 
