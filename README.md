@@ -64,6 +64,7 @@ BUILD SUCCESSFUL in 2m
 ```
 
 - all the git add / git commits
+- in intellij import as a gradle project: now you can start all gradle tasks from intellij in the gui
 
 ## Structure of this Gradle Kotlin Multi-Project Build
 
@@ -75,13 +76,134 @@ In the subproject / directory **app* is the main Java application.
 
 Its main class is 'in.halter.roebi.roebiapplicationcli.app.App'.
 
-This **app** use implementation of project / directory / library Java **utilities**.
+This **app** use
+
+- implementation of project / directory / library Java **utilities**.
+- library org.apache.commons:commons-text
 
 This **utilities** library use api of project / directory / library Java **list**.
 
 More Information about Gradle Kotlin Multi-Project Build: [Executing Multi-Project Builds](https://docs.gradle.org/current/userguide/intro_multi_project_builds.html)
 
-## Developing
+## Developing / what I have already done
+
+before we start development let's run a few typical gradle tasks:
+
+Hint: gradle init installs a gradle wrapper.
+
+This means all the gradle tasks / commands can executed with **./gradlew ...*
+
+```git bash
+# shows the installed gradle version
+./gradlew -version
+
+# show the dependencies when the application is running
+./gradlew app:dependencies --configuration runtimeClasspath
+
+# show the dependencies when the application is running fot unitests (with added junit dependencies)
+./gradlew app:dependencies --configuration testRuntimeClasspath
+
+# Gradle 'main' help
+./gradlew help 
+
+# list Gradle Tasks grouped by Gradle Task group
+./gradlew tasks
+
+# Gradle command-line options
+./gradlew --help 
+
+# list detected used Java JDK
+./gradlew javaToolChains
+
+# application specific tasks:
+# run the application
+./gradlew run
+# identical to:
+./gradlew :app:run
+
+# check / test tasks
+./gradlew check
+./gradlew test
+
+# rerun unoptimized check / test
+./gradlew check --rerun-tasks
+```
+
+### html generated testresults are in
+
+... /app/build/reports/tests/test/index.html
+
+1 Unittest
+
+... /utilities/build/reports/tests/test/index.html
+
+does current not exist
+
+0 Unittest
+
+... /list/build/reports/tests/test/index.html
+
+4 Unittests
+
+## continue with Developing / what I have already done
+
+### more application specific gradle task **installDist**:
+
+```git bash
+# application specific task installDist:
+# 'Installs' the project as a distribution as-is
+./gradlew installDist
+```
+
+now your application is in directory
+
+... /app/build/install in the subdirectory **app**
+
+with a subdirectory **bin** and a subdirectory **lib**
+
+now you can start the application in the **bin** dir with
+
+app (linux / macOS) or app.bat (windows)
+
+### more application specific gradle task **distZip** or **distTar**:
+
+description is for **distZip**, **distTar** is similar:
+
+```git bash
+# application specific task distZip:
+# Bundles the project as a distribution
+./gradlew distZip
+```
+now your bundled application is in directory
+
+... /app/build/distributions as a **app.zip** file
+
+guess the content ?
+
+it is 1:1 the content of ... /app/build/install
+
+from Gradle Task **installDist**
+
+personally i like this Gradle Application Plugin so much:
+
+no more pain with Java Class Paths
+
+## continue with Developing / what I have already done
+
+up to here it was a project setup with explanations.
+
+### following parts are missing
+
+- (NICE to HAVE) add a bash file with all the gradle tasks
+- (MUST) add dependency for easy commandline handling
+- (LATER) publishing gradle publish plugin
+- (LATER) gradle doctor plugin
+
+### add the missing parts / what I have already done
+
+#### (MUST) add dependency for easy commandline handling
+
+...
 
 Here's a brief intro about what a developer must do in order to start developing
 the project further:
