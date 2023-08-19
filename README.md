@@ -412,6 +412,28 @@ https://docs.gradle.org/current/dsl/org.gradle.api.tasks.JavaExec.html
 ./gradlew run --args='--repeat=2 i like gradle and picocli'
 ```
 
+an additional relevant thing: the Java Version for sourceCompatibility and targetCompatibility:
+
+we would like the actual LTS Version of Java: Java 17
+
+if you define the gradle toolchain Java Version,
+
+then gradle use the same Java Version for Java Compiling and running:
+
+from
+
+https://docs.gradle.org/current/userguide/toolchains.html#toolchains
+
+add in buildSrc/src/main/kotlin/in.halter.roebi.roebiapplicationcli.java-common-conventions.gradle.kts
+
+```git bash
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
+```
+
 That's it - thank you for following / working through this README.md
 
 ## from here it is the remaining piece of the README.md template from
