@@ -311,3 +311,7 @@ state what the license is and how to find the text version of the license.
 Something like:
 
 "The code in this project is licensed under MIT license."
+
+## README.md Structure based on / attribution / thanks to
+
+https://github.com/jehna/readme-best-practices
