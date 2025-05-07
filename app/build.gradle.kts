@@ -10,7 +10,7 @@ dependencies {
     implementation("org.apache.commons:commons-text")
     implementation(project(":utilities"))
     // https://mvnrepository.com/artifact/info.picocli/picocli
-    implementation("info.picocli:picocli:4.7.6")
+    implementation("info.picocli:picocli:4.7.7")
 }
 
 application {
